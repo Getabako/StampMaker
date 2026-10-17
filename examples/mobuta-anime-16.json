@@ -1,0 +1,13 @@
+{
+  "kind": "animation",
+  "count": 16,
+  "characterIds": ["mobuta"],
+  "brief": {
+    "title": "動く！モブ太",
+    "theme": "毎日の返事・あいさつ・気持ちを元気に動かす",
+    "audience": "家族・友だち",
+    "tone": "元気・素直・かわいい",
+    "textMode": "with",
+    "frames": "6"
+  }
+}

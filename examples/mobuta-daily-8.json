@@ -1,0 +1,11 @@
+{
+  "kind": "static",
+  "count": 8,
+  "characterIds": ["mobuta"],
+  "brief": {
+    "theme": "毎日使える返事とあいさつ",
+    "audience": "家族や友だちとの LINE",
+    "tone": "元気・素直・かわいい",
+    "textMode": "with"
+  }
+}

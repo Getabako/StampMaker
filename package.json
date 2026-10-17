@@ -1,0 +1,9 @@
+{
+  "name": "stamp-maker",
+  "version": "1.0.0",
+  "private": true,
+  "description": "LINEスタンプメーカー 〜売れるスタンプを企画から書き出しまで〜 — キャラクター画像 1 枚から、売れやすい構成のスタンプセット（静止画 / BIG / メッセージ / アニメーション / 絵文字）を codex CLI（サブスク）の画像生成で作り、LINE Creators Market の仕様に合わせて検査・ZIP 書き出しまで行う。依存パッケージ不要、データはすべてローカル保存。",
+  "bin": { "stamp-maker": "bin/cli.js" },
+  "scripts": { "start": "node bin/cli.js", "dev": "node bin/cli.js" },
+  "license": "UNLICENSED"
+}

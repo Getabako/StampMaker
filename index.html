@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LINEスタンプメーカー 〜売れるスタンプを企画から書き出しまで〜</title>
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="i-brush" viewBox="0 0 24 24"><path d="M15 3l6 6-9 9H6v-6z"/><path d="M14 5l5 5"/><path d="M6 15c-2 0-3 1-3 3s-1 3-1 3 4 0 5-2c.5-1 .5-2 0-3z"/></symbol>
+  <symbol id="i-list" viewBox="0 0 24 24"><path d="M4 6h16M4 12h16M4 18h10"/></symbol>
+  <symbol id="i-gear" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.7 1.7 0 0 0 .3 1.8l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-1.8-.3 1.7 1.7 0 0 0-1 1.5V21a2 2 0 1 1-4 0v-.1a1.7 1.7 0 0 0-1.1-1.5 1.7 1.7 0 0 0-1.8.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.7 1.7 0 0 0 .3-1.8 1.7 1.7 0 0 0-1.5-1H3a2 2 0 1 1 0-4h.1a1.7 1.7 0 0 0 1.5-1.1 1.7 1.7 0 0 0-.3-1.8l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.7 1.7 0 0 0 1.8.3H9a1.7 1.7 0 0 0 1-1.5V3a2 2 0 1 1 4 0v.1a1.7 1.7 0 0 0 1 1.5 1.7 1.7 0 0 0 1.8-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.7 1.7 0 0 0-.3 1.8V9a1.7 1.7 0 0 0 1.5 1H21a2 2 0 1 1 0 4h-.1a1.7 1.7 0 0 0-1.5 1z"/></symbol>
+  <symbol id="i-user" viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/></symbol>
+  <symbol id="i-folder" viewBox="0 0 24 24"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></symbol>
+  <symbol id="i-back" viewBox="0 0 24 24"><path d="M19 12H5M12 19l-7-7 7-7"/></symbol>
+  <symbol id="i-trash" viewBox="0 0 24 24"><path d="M3 6h18M8 6V4h8v2M19 6l-1 14H6L5 6M10 11v6M14 11v6"/></symbol>
+  <symbol id="i-refresh" viewBox="0 0 24 24"><path d="M23 4v6h-6M1 20v-6h6"/><path d="M3.5 9a9 9 0 0 1 14.9-3.4L23 10M1 14l4.6 4.4A9 9 0 0 0 20.5 15"/></symbol>
+  <symbol id="i-download" viewBox="0 0 24 24"><path d="M12 3v12M6 11l6 6 6-6"/><path d="M4 21h16"/></symbol>
+  <symbol id="i-play" viewBox="0 0 24 24"><path d="M6 4l14 8-14 8z"/></symbol>
+</svg>
+
+<header class="site-header">
+  <h1>LINEスタンプメーカー</h1>
+  <p class="subtitle">キャラクター 1 枚から、売れやすい構成のスタンプセットを企画し、描き、LINE Creators Market の仕様で書き出す</p>
+</header>
+
+<nav class="tabs" id="tabs">
+  <button class="tab active" data-view="make"><svg class="ic"><use href="#i-brush"/></svg>作る</button>
+  <button class="tab" data-view="list"><svg class="ic"><use href="#i-list"/></svg>セットの一覧</button>
+  <button class="tab" data-view="chars"><svg class="ic"><use href="#i-user"/></svg>キャラクター</button>
+  <button class="tab" data-view="settings"><svg class="ic"><use href="#i-gear"/></svg>設定</button>
+</nav>
+
+<main>
+  <div id="license-banner" class="license-banner hidden"></div>
+  <div id="activate-panel" class="activate-panel hidden">
+    <p class="activate-lead">アシュラ会員の方はメールアドレスで認証できます。認証すると全種類（BIG・メッセージ・アニメーション・絵文字）と最大 40 個のセットが作れます。</p>
+    <div class="activate-row">
+      <input type="email" id="activate-email" placeholder="会員登録のメールアドレス" autocomplete="email">
+      <button type="button" id="activate-btn">認証</button>
+    </div>
+    <p id="activate-msg" class="activate-msg hidden"></p>
+  </div>
+  <div id="env-warning" class="warning-box hidden"></div>
+
+  <!-- ===== 作る ===== -->
+  <section class="view" id="view-make">
+    <section class="card">
+      <h2>1. キャラクターを選ぶ（20 人まで。3 人以上はオールスターセット）</h2>
+      <div class="char-grid" id="char-pick"></div>
+      <p class="note">自分のキャラを使うときは「キャラクター」タブで登録してください（透過 PNG 1 枚と見た目の説明）。</p>
+    </section>
+
+    <section class="card">
+      <h2>2. 種類と個数</h2>
+      <div class="kind-grid" id="kind-grid"></div>
+      <div class="form-grid">
+        <div class="field">
+          <label for="f-count">個数</label>
+          <select id="f-count"></select>
+        </div>
+        <div class="field">
+          <label for="f-textmode">文字</label>
+          <select id="f-textmode">
+            <option value="with">全部にセリフを入れる（おすすめ）</option>
+            <option value="mixed">7 割セリフ・3 割文字なし</option>
+            <option value="none">文字なし（表情だけ）</option>
+          </select>
+        </div>
+        <div class="field hidden" id="f-frames-wrap">
+          <label for="f-frames">アニメのコマ数</label>
+          <select id="f-frames">
+            <option value="5">5 コマ（速い）</option>
+            <option value="6" selected>6 コマ</option>
+            <option value="8">8 コマ（なめらか・時間がかかる）</option>
+          </select>
+        </div>
+      </div>
+      <p class="note" id="kind-hint"></p>
+    </section>
+
+    <section class="card">
+      <h2>3. テーマと狙い</h2>
+      <div class="form-grid">
+        <div class="field wide">
+          <label for="f-theme">テーマ（どんな場面で使うスタンプか）</label>
+          <input type="text" id="f-theme" placeholder="例）毎日使える返事とあいさつ / 仕事の連絡 / 子育て中の親同士 / AI と一緒に働く人">
+        </div>
+        <div class="field">
+          <label for="f-audience">想定する使い手</label>
+          <input type="text" id="f-audience" placeholder="例）20〜40 代の会社員 / 家族 LINE">
+        </div>
+        <div class="field">
+          <label for="f-tone">トーン</label>
+          <input type="text" id="f-tone" placeholder="例）ゆるくてかわいい / 元気 / シュール">
+        </div>
+        <div class="field wide">
+          <label for="f-phrases">必ず入れたいセリフ（任意・カンマ区切り）</label>
+          <input type="text" id="f-phrases" placeholder="例）了解のじゃ, おつかれ, 今向かってる">
+        </div>
+        <div class="field wide">
+          <label for="f-notes">その他の要望（任意）</label>
+          <textarea id="f-notes" rows="3" placeholder="例）小物にノート PC を多めに / 季節感は入れない / 2 人の掛け合いを多めに"></textarea>
+        </div>
+        <div class="field">
+          <label for="f-title">タイトル（任意・空なら自動）</label>
+          <input type="text" id="f-title" placeholder="例）モブ太のまいにちスタンプ">
+        </div>
+        <div class="field">
+          <label for="f-auto">進め方</label>
+          <select id="f-auto">
+            <option value="plan">まず企画（セリフ一覧）を見てから描く</option>
+            <option value="auto">企画から ZIP まで一気に作る</option>
+          </select>
+        </div>
+      </div>
+      <div class="actions">
+        <button type="button" id="btn-submit" class="primary">企画を作る</button>
+        <span id="submit-note" class="note"></span>
+      </div>
+    </section>
+
+    <section class="card">
+      <h2>処理状況</h2>
+      <div id="jobs" class="jobs"><p class="note">まだ処理はありません。</p></div>
+    </section>
+  </section>
+
+  <!-- ===== セットの一覧 ===== -->
+  <section class="view hidden" id="view-list">
+    <section class="card">
+      <div class="row-between">
+        <h2>作ったセット</h2>
+        <div>
+          <button type="button" id="btn-reload-list" class="ghost"><svg class="ic"><use href="#i-refresh"/></svg>更新</button>
+          <button type="button" id="btn-open-data-list" class="ghost"><svg class="ic"><use href="#i-folder"/></svg>保存フォルダを開く</button>
+        </div>
+      </div>
+      <div id="set-list" class="set-list"></div>
+    </section>
+  </section>
+
+  <!-- ===== 詳細 ===== -->
+  <section class="view hidden" id="view-detail">
+    <button type="button" id="btn-back" class="ghost"><svg class="ic"><use href="#i-back"/></svg>一覧へ戻る</button>
+    <div id="detail"></div>
+  </section>
+
+  <!-- ===== キャラクター ===== -->
+  <section class="view hidden" id="view-chars">
+    <section class="card">
+      <h2>登録済みのキャラクター</h2>
+      <div class="char-grid" id="char-list"></div>
+    </section>
+    <section class="card">
+      <h2>キャラクターを追加</h2>
+      <div class="form-grid">
+        <div class="field">
+          <label for="c-name">名前</label>
+          <input type="text" id="c-name" placeholder="例）ぽんた">
+        </div>
+        <div class="field">
+          <label for="c-image">参照画像のパス（PNG。透過か単色背景）</label>
+          <input type="text" id="c-image" placeholder="例）~/Desktop/ponta.png">
+        </div>
+        <div class="field wide">
+          <label for="c-desc">見た目の説明（絵師に伝えるつもりで具体的に）</label>
+          <textarea id="c-desc" rows="3" placeholder="例）茶色いたぬきの 2 頭身キャラ。緑の葉っぱを頭に乗せ、赤いマフラー。太い輪郭線のアニメ塗り。"></textarea>
+        </div>
+        <div class="field wide">
+          <label for="c-speech">口調（セリフ作りに使う）</label>
+          <input type="text" id="c-speech" placeholder="例）語尾は「〜だぽん」。のんびり。">
+        </div>
+      </div>
+      <div class="actions">
+        <button type="button" id="btn-add-char" class="primary">追加する</button>
+        <span id="char-msg" class="note"></span>
+      </div>
+    </section>
+  </section>
+
+  <!-- ===== 設定 ===== -->
+  <section class="view hidden" id="view-settings">
+    <section class="card">
+      <h2>設定</h2>
+      <div class="form-grid">
+        <div class="field wide">
+          <label for="s-datadir">データ保存先</label>
+          <input type="text" id="s-datadir">
+        </div>
+        <div class="field">
+          <label for="s-creator">クリエイター名（申請メモに入れる）</label>
+          <input type="text" id="s-creator" placeholder="例）if-juku">
+        </div>
+        <div class="field">
+          <label for="s-copyright">コピーライト（英数字のみ）</label>
+          <input type="text" id="s-copyright" placeholder="例）(C) 2026 if-juku">
+        </div>
+        <div class="field">
+          <label for="s-workurl">作品が確認できるURL（LINE 登録画面へ一括入力）</label>
+          <input type="text" id="s-workurl" placeholder="例）キャラクターが載っている自分のサイトのURL">
+        </div>
+        <div class="field">
+          <label for="s-reviewnote">その他、補足事項（LINE 登録画面へ一括入力）</label>
+          <input type="text" id="s-reviewnote" placeholder="例）〇〇は自作のオリジナルキャラクターです。">
+        </div>
+        <div class="field">
+          <label for="s-workurl">作品が確認できるURL（LINE 登録画面へ一括入力）</label>
+          <input type="text" id="s-workurl" placeholder="例）キャラクターが載っている自分のサイトのURL">
+        </div>
+        <div class="field">
+          <label for="s-reviewnote">その他、補足事項（LINE 登録画面へ一括入力）</label>
+          <input type="text" id="s-reviewnote" placeholder="例）〇〇は自作のオリジナルキャラクターです。">
+        </div>
+        <div class="field">
+          <label for="s-batch">1 回の codex 呼び出しで描く枚数</label>
+          <select id="s-batch"><option value="3">3</option><option value="5">5</option><option value="8">8</option></select>
+        </div>
+        <div class="field">
+          <label for="s-parallel">同時に走らせる codex の数</label>
+          <select id="s-parallel"><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option></select>
+        </div>
+        <div class="field">
+          <label for="s-check">生成後の点検（文字崩れ・キャラ崩れ）</label>
+          <select id="s-check"><option value="1">する（おすすめ）</option><option value="0">しない（速い）</option></select>
+        </div>
+        <div class="field">
+          <label for="s-model">codex のモデル（空なら既定）</label>
+          <input type="text" id="s-model" placeholder="空欄のまま推奨">
+        </div>
+      </div>
+      <div class="actions">
+        <button type="button" id="btn-save-settings" class="primary">保存</button>
+        <button type="button" id="btn-open-data" class="ghost"><svg class="ic"><use href="#i-folder"/></svg>保存フォルダを開く</button>
+        <span id="settings-msg" class="note"></span>
+      </div>
+      <p class="note">設定ファイル: <span id="config-path"></span></p>
+    </section>
+    <section class="card">
+      <h2>環境チェック</h2>
+      <div id="env-check"></div>
+    </section>
+    <section class="card">
+      <h2>LINE Creators Market の仕様（このツールが自動で合わせるもの）</h2>
+      <ul class="spec-list" id="spec-list"></ul>
+      <p class="note">申請は <a href="https://creator.line.me/ja/" target="_blank" rel="noopener">LINE Creators Market</a> から。書き出した ZIP をそのままアップロードできます。生成 AI を使ったことを申請画面で申告してください。</p>
+    </section>
+  </section>
+</main>
+
+<footer class="site-footer"><span id="free-credit"></span></footer>
+<script src="js/app.js"></script>
+</body>
+</html>

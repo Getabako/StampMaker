@@ -1,0 +1,13 @@
+{
+  "kind": "animation",
+  "count": 16,
+  "characterIds": ["ashura"],
+  "brief": {
+    "title": "動く！アシュラくん",
+    "theme": "毎日使える返事と感情表現を、6 本の腕と道具でにぎやかに動かす",
+    "audience": "幅広い年代",
+    "tone": "にぎやか・頼もしい・おもしろい",
+    "textMode": "with",
+    "frames": "6"
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "kind": "static",
+  "count": 32,
+  "characterIds": ["mobuta"],
+  "brief": {
+    "title": "モブ太のまいにちスタンプ",
+    "theme": "毎日の返事・あいさつ・気持ち。素直な小学生のリアクション",
+    "audience": "家族・友だち・習い事の連絡",
+    "tone": "元気・素直・かわいい",
+    "textMode": "with"
+  }
+}

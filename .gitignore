@@ -1,0 +1,5 @@
+# アシュラ起動スクリプトの状態（pid / url / log）
+.ashura/
+# 試作・案件固有の依頼ファイル
+examples/private/
+work/
