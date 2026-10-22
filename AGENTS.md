@@ -23,7 +23,7 @@
 
 ## 起動の作法（手動フォールバック。通常は上記 ashura-start.sh を実行する）
 
-1. Node.js 20 以上があるか確認する（`node --version`）。無ければ `brew install node`
+1. Node.js 24 以上があるか確認する（`node --version`）。無ければ `brew install node`
 2. 依存パッケージのインストールは不要（Node 標準モジュールのみ。PNG / APNG / ZIP も自前）
 3. `node bin/cli.js` で起動（ポート 4594 を起点に空きポートを自動選択）。ブラウザが自動で開く
 4. 生成には codex CLI（ChatGPT サブスク）が必要。`codex --version`（0.150 以上）、無ければ `brew install codex`、未ログインなら `codex login`

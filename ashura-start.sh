@@ -144,7 +144,7 @@ if ! command -v node >/dev/null 2>&1; then
   exit 1
 fi
 MAJOR="$(node -p 'process.versions.node.split(".")[0]' 2>/dev/null || echo 0)"
-if [ "$MAJOR" -lt 20 ]; then fail "Node.js 20 以上が必要です（現在 $(node -v)）。更新してから再実行してください。"; exit 1; fi
+if [ "$MAJOR" -lt 24 ]; then fail "Node.js 24 以上が必要です（現在 $(node -v)）。次の 1 行をターミナルに貼ると更新されます: /bin/bash -c \"\$(curl -fsSL https://service.if-juku.net/Ashura/setup.sh)\""; exit 1; fi
 command -v codex >/dev/null 2>&1 || echo "  注意: codex CLI が見つかりません。画面は開きますが、生成機能には codex が必要です（brew install codex または npm i -g @openai/codex）"
 # codex は古いと新しいモデル（gpt-5.6-sol 以降）を使えないので、0.150 未満なら自動で更新する
 if command -v codex >/dev/null 2>&1; then

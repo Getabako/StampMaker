@@ -101,7 +101,7 @@ Show-AshuraVersion
 # 1. Node.js
 if (-not (Get-Command node -ErrorAction SilentlyContinue)) { Fail "Node.js が見つかりません。https://nodejs.org から LTS 版を入れて、もう一度実行してください。"; exit 1 }
 $major = [int]((node -p "process.versions.node.split('.')[0]") 2>$null)
-if ($major -lt 20) { Fail "Node.js 20 以上が必要です（現在 $(node -v)）。"; exit 1 }
+if ($major -lt 24) { Fail "Node.js 24 以上が必要です（現在 $(node -v)）。PowerShell に次の 1 行を貼ると更新されます: iwr -useb https://service.if-juku.net/Ashura/setup.ps1 | iex"; exit 1 }
 if (-not (Get-Command codex -ErrorAction SilentlyContinue)) { Write-Host "  注意: codex CLI が見つかりません。画面は開きますが、生成機能には codex が必要です（npm i -g @openai/codex）" }
 # codex は古いと新しいモデル（gpt-5.6-sol 以降）を使えないので、0.150 未満なら自動で更新する
 if (Get-Command codex -ErrorAction SilentlyContinue) {
