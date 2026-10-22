@@ -230,7 +230,8 @@ function listen(port, triesLeft) {
     if (e.code === 'EADDRINUSE' && triesLeft > 0) listen(port + 1, triesLeft - 1);
     else { console.error('起動に失敗しました:', e.message); process.exit(1); }
   });
-  server.listen(port, () => {
+  // このパソコンの中（127.0.0.1）だけで待ち受ける。同じ Wi-Fi のほかの機器からは開けない
+  server.listen(port, '127.0.0.1', () => {
     const url = `http://localhost:${port}`;
     console.log('');
     console.log('  LINEスタンプメーカー 〜売れるスタンプを企画から書き出しまで〜');
