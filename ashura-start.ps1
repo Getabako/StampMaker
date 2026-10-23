@@ -101,7 +101,15 @@ Show-AshuraVersion
 # 1. Node.js
 if (-not (Get-Command node -ErrorAction SilentlyContinue)) { Fail "Node.js が見つかりません。https://nodejs.org から LTS 版を入れて、もう一度実行してください。"; exit 1 }
 $major = [int]((node -p "process.versions.node.split('.')[0]") 2>$null)
-if ($major -lt 24) { Fail "Node.js 24 以上が必要です（現在 $(node -v)）。PowerShell に次の 1 行を貼ると更新されます: iwr -useb https://service.if-juku.net/Ashura/setup.ps1 | iex"; exit 1 }
+if ($major -lt 24) { Fail "Node.js 24 以上が必要です（現在 $(node -v)）。おすすめ: Claude Code か Codex に「Node.js を最新の LTS に更新して」と頼む（または https://nodejs.org/ja/download から LTS 版を入れる）"; exit 1 }
+# 2026-10 のセキュリティ修正版（24.22.1・26.12.1）より古いときは注意だけ出す（起動は続ける）
+try {
+  $nv = [version]((node -p "process.versions.node") 2>$null)
+  if (-not ($nv.Major -ge 27 -or ($nv.Major -eq 26 -and $nv -ge [version]'26.12.1') -or ($nv.Major -eq 24 -and $nv -ge [version]'24.22.1'))) {
+    Write-Host "  注意: いまの Node.js（$(node -v)）には、2026 年 10 月のセキュリティ修正が入っていません。このまま起動しますが、お早めに更新してください。" -ForegroundColor Yellow
+    Write-Host "        おすすめ: Claude Code か Codex に「Node.js を最新の LTS に更新して」と頼む（または https://nodejs.org/ja/download から LTS 版を入れる）" -ForegroundColor Yellow
+  }
+} catch {}
 if (-not (Get-Command codex -ErrorAction SilentlyContinue)) { Write-Host "  注意: codex CLI が見つかりません。画面は開きますが、生成機能には codex が必要です（npm i -g @openai/codex）" }
 # codex は古いと新しいモデル（gpt-5.6-sol 以降）を使えないので、0.150 未満なら自動で更新する
 if (Get-Command codex -ErrorAction SilentlyContinue) {
