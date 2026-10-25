@@ -1,4 +1,4 @@
-# LINEスタンプメーカー 〜売れるスタンプを企画から書き出しまで〜 — ワンライン導入＆起動（Windows / PowerShell）
+﻿# LINEスタンプメーカー 〜売れるスタンプを企画から書き出しまで〜 — ワンライン導入＆起動（Windows / PowerShell）
 #
 # 導入コマンドはアシュラのサイト（https://service.if-juku.net/Ashura/arts）で配布しています。
 #
