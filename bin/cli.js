@@ -31,10 +31,9 @@ const START_PORT = parseInt(process.env.PORT || '4594', 10);
 
 // --- アシュラ会員ライセンス ---
 let licensePromise = null;
+// 判定は license.js が覚えて裏で確かめ直す（2026-11-11）。起動時の判定を持ち続けず、毎回そこに聞く
 function getLicense() {
-  if (!licensePromise) {
-    licensePromise = resolveLicense().then((l) => Object.assign(l, { freeCredit: FREE_CREDIT })).catch(() => ({ mode: 'free', message: 'ライセンス判定に失敗したためフリー版で動作します。', freeCredit: FREE_CREDIT }));
-  }
+  licensePromise = resolveLicense().then((l) => Object.assign(l, { freeCredit: FREE_CREDIT })).catch(() => ({ mode: 'free', message: 'ライセンス判定に失敗したためフリー版で動作します。', freeCredit: FREE_CREDIT }));;
   return licensePromise;
 }
 
